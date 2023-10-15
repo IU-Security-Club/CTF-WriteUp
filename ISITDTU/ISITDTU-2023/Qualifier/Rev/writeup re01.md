@@ -22,108 +22,114 @@
 
 * Phân tích lần lượt từ hàm main, ta sẽ thấy 
 	+ một đoạn giá trị được define. Theo kinh nghiệm của mình thì cứ đặt debug ngay sau đoạn define để lấy được giá trị của array đó, có thể sẽ có tác dụng sau này (Nhớ sửa lại tên cho dễ nhớ).
+	```python
+ 	const_val = [	0x43AD, 0x4CFC, 0x52A8, 0x5AA2, 0x651C, 0x4881, 0x5203, 0x57DF, 0x6043, 0x6B51, 
+		        0x49C6, 0x538F, 0x5975, 0x6231, 0x6D6B, 0x42DC, 0x4C10, 0x51AC, 0x59B8, 0x6448, 
+		        0x1F63, 0x2475, 0x27C9, 0x2C8D, 0x333F	]
+ 	```
+
+	![input](./re01/img/input.png "input")
 
 	+ Chuỗi string sẽ cần 25 kí tự
 
-![input](./re01/img/input.png "input")
-
-	+ Các hàm bên dưới cũng không có liên quan gì đến *input* cả, thế nên thôi kệ, cứ **F8** để nó chạy qua cái hàm rồi xem kết quả là gì. Kết quả trả ra là bảng giá trị số nguyên tố (cố định).
+	+ Các hàm bên dưới cũng không có liên quan gì đến *input* cả, thế nên cứ kệ thôi, **F8** để nó chạy qua cái hàm rồi xem kết quả là gì. Kết quả trả ra là bảng giá trị số nguyên tố (cố định).
 
 	+ Hàm mình cần quan tâm đó là *sub_2AA8* vì nó chứa dòng message "Congrat" thôi.
 
-![const_func](./re01/img/const_func.png "const_func")
+	![const_func](./re01/img/const_func.png "const_func")
 
-![đổi tên lại cho dễ nhìn](./re01/img/const_func2.png "const_func2")
+	+ đổi tên lại cho dễ nhìn
+
+	![const_func2](./re01/img/const_func2.png "const_func2")
 
 * Phân tích nhanh hàm checker, ta thấy 
 	+ Để thỏa mãn được cout >> "Congrat" phải đi qua một bước so sánh *v18* với array cố định được gán ban đầu.
 
 	+ Mà trước đó array *v18* (kèm với *inp* và *prime* đã được xử lý qua hàm *sub_2769*), chính vì thế cần phân tích hàm này.
 
-![checker](./re01/img/checker.png "checker")
+	![checker](./re01/img/checker.png "checker")
 
-	+ Tổng quan, hàm này dùng để nhân *input* và *prime* lại với nhau, sau đó cộng vào output (là array *v18* hay *out_enc* hay *enc_inp*)
+	+ Tổng quan, hàm này dùng để nhân *input* và *prime* lại với nhau, sau đó cộng vào output (là array *v18* hay *out_enc*)
 
-![main_enc](./re01/img/main_enc.png "main_enc")
+	![main_enc](./re01/img/main_enc.png "main_enc")
 
-![main_enc2](./re01/img/main_enc2.png "main_enc2")
+	![main_enc2](./re01/img/main_enc2.png "main_enc2")
 
-	+ Có thể thấy được trong công thức ở trên, ```shell enc_inp += prime * inp```, *enc_inp* và *prime* là cố định và có thể dùng nó để tìm ngược lại inp. Tuy nhiên cần phải tìm ra quy luật các phép tính.
+	+ Có thể thấy được trong công thức ở trên, ```enc_inp += prime * inp```, *enc_inp* và *prime* là cố định và có thể dùng nó để tìm ngược lại inp. Tuy nhiên cần phải tìm ra quy luật các phép tính.
 
 ### 3. Coding
 
 * Đầu tiên, chạy lại hàm và tìm ra quy luật của nó
 
-``` python
-enc  0  prime  0  input  0
-enc  0  prime  5  input  1
-enc  0  prime  10  input  2
-enc  0  prime  15  input  3
-enc  0  prime  20  input  4
-enc  1  prime  1  input  0
-enc  1  prime  6  input  1
-enc  1  prime  11  input  2
-enc  1  prime  16  input  3
-enc  1  prime  21  input  4
-enc  2  prime  2  input  0
-enc  2  prime  7  input  1
-enc  2  prime  12  input  2
-enc  2  prime  17  input  3
-enc  2  prime  22  input  4
-...
-```
+	``` python
+	enc  0  prime  0  input  0
+	enc  0  prime  5  input  1
+	enc  0  prime  10  input  2
+	enc  0  prime  15  input  3
+	enc  0  prime  20  input  4
+	enc  1  prime  1  input  0
+	enc  1  prime  6  input  1
+	enc  1  prime  11  input  2
+	enc  1  prime  16  input  3
+	enc  1  prime  21  input  4
+	enc  2  prime  2  input  0
+	enc  2  prime  7  input  1
+	enc  2  prime  12  input  2
+	enc  2  prime  17  input  3
+	enc  2  prime  22  input  4
+	...
+	```
 
 	+ Suy ra mỗi *enc_inp* sẽ được tính bằng một biểu thức
+ 
+	```python
+	enc[0] = prime[0]*input[0] + prime[5]*input[1] + prime[10]*input[2] + prime[15]*input[3] + prime[20]*input[4]
+	```
 
-```python
-enc[0] = prime[0]*input[0] + prime[5]*input[1] + prime[10]*input[2] + prime[15]*input[3] + prime[20]*input[4]
-```
-
-	+ ==> Dùng Z3-Solver để giải.
+* ==> Dùng Z3-Solver để giải.
 
 	+ File [temp.txt](./temp.txt) để lưu các biểu thức, gán luôn các giá trị *prime* vào.
-
-```
-a0 * 2 
-a1 * 13 
-a2 * 31 
-a3 * 53 
-a4 * 73 
-a0 * 3 
-a1 * 17 
-a2 * 37 
-a3 * 59 
-a4 * 79 
-...
-```
+	```
+	a0 * 2 
+	a1 * 13 
+	a2 * 31 
+	a3 * 53 
+	a4 * 73 
+	a0 * 3 
+	a1 * 17 
+	a2 * 37 
+	a3 * 59 
+	a4 * 79 
+	...
+	```
 
 	+ Để cho nhanh và gọn thì code một hàm để gen ra các biểu thức cần giải. 
-
-```python
-enc = [0x43AD, 0x4CFC, 0x52A8, 0x5AA2, 0x651C, 0x4881, 0x5203, 0x57DF, 0x6043, 0x6B51, 
-        0x49C6, 0x538F, 0x5975, 0x6231, 0x6D6B, 0x42DC, 0x4C10, 0x51AC, 0x59B8, 0x6448, 
-        0x1F63, 0x2475, 0x27C9, 0x2C8D, 0x333F]
-def second_stage():
-    cnt = 0
-    with open('temp.txt',"r") as f:
-        for i in range(0,25):
-            s = 's.add('
-            s += f.readline().strip() + ' + '
-            s += f.readline().strip() + ' + '
-            s += f.readline().strip() + ' + '
-            s += f.readline().strip() + ' + '
-            s += f.readline().strip()        
-            s += f" == {enc[cnt]})"
-            print(s)
-            cnt += 1
-#stage_two()
-```
+ 
+	```python
+	enc = [0x43AD, 0x4CFC, 0x52A8, 0x5AA2, 0x651C, 0x4881, 0x5203, 0x57DF, 0x6043, 0x6B51, 
+	        0x49C6, 0x538F, 0x5975, 0x6231, 0x6D6B, 0x42DC, 0x4C10, 0x51AC, 0x59B8, 0x6448, 
+	        0x1F63, 0x2475, 0x27C9, 0x2C8D, 0x333F]
+	def second_stage():
+	    cnt = 0
+	    with open('temp.txt',"r") as f:
+	        for i in range(0,25):
+	            s = 's.add('
+	            s += f.readline().strip() + ' + '
+	            s += f.readline().strip() + ' + '
+	            s += f.readline().strip() + ' + '
+	            s += f.readline().strip() + ' + '
+	            s += f.readline().strip()        
+	            s += f" == {enc[cnt]})"
+	            print(s)
+	            cnt += 1
+	#stage_two()
+	```
 
 	+ Output:
 
-![z3](./re01/img/z3.png "z3")
+	![z3](./re01/img/z3.png "z3")
 
-	+ Sau đó cài đặt z3 để cho nó tự chạy ra flag thôi (giới hạn kí tự trong ascii).
+* Sau đó cài đặt z3 để cho nó tự chạy ra flag thôi (giới hạn kí tự trong ascii).
 
 ```python
 from z3 import *
@@ -174,9 +180,8 @@ while s.check() == sat:
         flag += chr(model[c].as_long())
 
         block.append(c != model[c])
-
     s.add(Or(block))
-    
+
     print(flag)
 ```
 
