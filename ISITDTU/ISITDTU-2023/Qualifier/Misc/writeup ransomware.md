@@ -50,7 +50,7 @@ vol.py -f mydump.raw kdbgscan
 
 	![invoice](./Ransomware/img/invoice.png "invoice")
 
-	![timestamp](./Ransomware/img/timestamp.png "timestamp")
+	![timestamp](./Ransomware/img/timestamp.PNG "timestamp")
 
 	==> Lấy được time xuất hiện của mã độc, 2022-11-22 11:06:20 UTC+7, trả lời được câu hỏi thứ 1.
 
@@ -144,7 +144,7 @@ vol.py -f mydump.raw kdbgscan
 * ==> Tìm được persistence của mã độc là *tasksche.exe*
 
 #### ghép 3 cái lại, flag là 
-	```ISITDTU{2022-11-22_11-06-20_tasksche.exe_invoice.pdf.exe}```
+	ISITDTU{2022-11-22_11-06-20_tasksche.exe_invoice.pdf.exe}
 
 
 
