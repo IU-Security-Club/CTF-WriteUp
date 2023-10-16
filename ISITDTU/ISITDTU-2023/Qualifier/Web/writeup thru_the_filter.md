@@ -146,3 +146,4 @@ b'ISITDTU{tough_times_create_tough_guys!@@%#0@}\n'
 ```
 
 But faster: https://github.com/Marven11/Fenjing :(
+reference: https://ctftime.org/writeup/17686
