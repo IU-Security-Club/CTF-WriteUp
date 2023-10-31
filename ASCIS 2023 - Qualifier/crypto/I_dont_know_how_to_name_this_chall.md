@@ -1,7 +1,7 @@
 # ASCIS - I_dont_know_how_to_name_this_chall
 
 ### Context
-We have 2 files which are chall.sage and output.txt\
+We have 2 files which are chall.sage and output.txt: \
 **chall.sage**
 ```py
 from Crypto.Random.random import getrandbits
@@ -147,7 +147,7 @@ phi=(p-1)*(q-1)
 
 d=pow(e,-1, phi)
 
-print(long_to_bytes(pow(enc,d,N)))
+print(long_to_bytes(pow(enc,d,n)))
 ```
 ```
 b'ASCIS{S0rry_1_caNt_make_a_b3tt3r_Crypt0_ch4ll}'
