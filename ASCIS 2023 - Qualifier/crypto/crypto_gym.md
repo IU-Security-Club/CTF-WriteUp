@@ -5,7 +5,7 @@ We have 2 files which are **pushup.sage** and **output.txt**:<br>
 ```py
 from Crypto.Util.number import *
 
-flag = b"ASCIS{W3llDone_hitting_the_crypto_gym}"
+flag = b"ASCIS{flag}"
 p = random_prime(2^64,False,2^63)
 k = 100
 N = p^k
