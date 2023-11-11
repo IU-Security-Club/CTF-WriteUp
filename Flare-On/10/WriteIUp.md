@@ -6,8 +6,8 @@
 >  [4 - aimbot](#4_aimbot)
 >
 
-Original Challenges: [here](http//flare-on.com/files/Flare-On10_Challenges.zip) \
-Original Solution: [here](https//www.mandiant.com/resources/flare-on-10-challenge-solutions)
+Original Challenges: [here](http://flare-on.com/files/Flare-On10_Challenges.zip) \
+Original Solution: [here](https://www.mandiant.com/resources/blog/flareon10-challenge-solutions)
 
 ## <a name="1_X"></a> 1 - X 
 
