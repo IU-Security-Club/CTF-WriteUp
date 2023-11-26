@@ -1,0 +1,2 @@
+python3.7 pyinstxtractor.py 11.exe
+run 11.pyc and add, modify 'crypt', copy of "PyCryptoDome" module to "11.exe_extracted"
