@@ -1,0 +1,11 @@
+File Size 54.20 MB (56828253 bytes)
+PE Size 53.87 MB (56490496 bytes)
+
+begin js 35DFA00
+readlin.question 35E3874
+<nexe~~sentinel>	363213D
+
+js size 5273D
+algo size 4e8c8
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
