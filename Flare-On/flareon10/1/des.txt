@@ -1,0 +1,9 @@
+X
+1
+Welcome to the 10th Annual Flare-On Challenge!
+
+Statistically, you probably won’t finish every challenge. Every journey toward excellence starts somewhere though, and yours starts here. Maybe it ends here too.
+
+This package contains many files and, I can’t believe i’m saying this, click the one with the “.exe” file extension to launch the program. Maybe focus your “reverse engineering” efforts on that one too.
+
+7-zip password: flare
