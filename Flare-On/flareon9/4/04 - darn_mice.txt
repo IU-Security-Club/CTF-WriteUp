@@ -1,0 +1,4 @@
+"If it crashes its user error." -Flare Team
+
+7-zip password: flare
+
