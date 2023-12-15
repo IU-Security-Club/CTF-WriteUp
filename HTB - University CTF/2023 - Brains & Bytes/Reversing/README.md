@@ -91,3 +91,4 @@ Và sau khi vào đến đây may mắn là nó so sánh với flag luôn :)
 
 ![flag_2](./img/flag_2.png)
 
+Đọc cách giải đúng cho bài này tại [đây](https://github.com/hackthebox/uni-ctf-2023/blob/main/uni-ctf-2023/rev/%5BMedium%5D%20BioBundle/README.md)
