@@ -14,6 +14,10 @@ Sau khi tải xong, ta lại thấy file vừa được tải đã được sử
 
 Cách dễ dàng nhất để giải quyết vấn đề này đó chính là xóa đoạn thực hiện powershell đi, cứ thế mà để cho nó chạy và in ra đoạn mã bị làm rối. (**Lưu ý** chỉ thực hiện cách này khi thay thế hoàn toàn các đoạn Run powershell)
 
+```shell
+wscript.exe .\BKtQR.vbs
+```
+
 ![powershell print](./img/pws_print.png)
 
 Sau khi được gỡ rối, đoạn mã được ghi vào output.txt, ta đem nó nhờ [PSUnveil](https://www.kahusecurity.com/posts/introducing_psunveil.html) giải quyết hộ thôi.
