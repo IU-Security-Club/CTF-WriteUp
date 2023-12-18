@@ -15,5 +15,6 @@
 * Web
 
 * Crypto
-
+    + [Mayday Mayday](./Crypto/Mayday_Mayday.md#mayday-mayday)
+    + [MSS](./Crypto/MSS.md#mss)
 * Pwn
