@@ -1,4 +1,4 @@
-# DOGDAYS Patriot CTF 2024
+# Impersonate Patriot CTF 2024
 @phulelouch
 ### Problem:
 
