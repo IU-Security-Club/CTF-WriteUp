@@ -1,6 +1,3 @@
-      - name: Create Indexes
-        uses: Exponential-Workload/create-index-action@master
-        with:
-          dir: '../' # optional - directory to create indexes in
-          # path: <some path> # optional, discouraged - path to write executable
-          # source: https://<some url> # optional, discouraged - source url of executable
+              - name: Create Indexes
+                uses: Exponential-Workload/create-index-action@0.1.1
+      
