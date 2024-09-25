@@ -31,7 +31,7 @@
       * [BLOB Patriot CTF 2024](PatriotCTF/PatriotCTF2024/web/blob/README.md)
       * [DOGDAYS Patriot CTF 2024](PatriotCTF/PatriotCTF2024/web/dogday/README.md)
       * [DOMDOM Patriot CTF 2024](PatriotCTF/PatriotCTF2024/web/domdom/README.md)
-      * [DOGDAYS Patriot CTF 2024](PatriotCTF/PatriotCTF2024/web/kiran/README.md)
+      * [Kiran Patriot CTF 2024](PatriotCTF/PatriotCTF2024/web/kiran/README.md)
 * [ISITDTU](isitdtu/README.md)
   * [ISITDTU-2023](isitdtu/isitdtu-2023/README.md)
     * [Qualifier](isitdtu/isitdtu-2023/qualifier/README.md)
