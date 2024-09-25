@@ -1,2 +1,0 @@
-# HTB - University CTF
-
