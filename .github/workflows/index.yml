@@ -1,2 +1,0 @@
-- name: Create Indexes	
-	uses: Exponential-Workload/create-index-action@0.1.1
