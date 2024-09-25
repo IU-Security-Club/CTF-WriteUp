@@ -1,0 +1,3 @@
+              - name: Markdown action: create indexes
+                uses: DaanV2/Markdown-Action-Create-Indexes@v5.0.2
+          
