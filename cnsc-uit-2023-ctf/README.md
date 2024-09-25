@@ -1,2 +1,0 @@
-# CNSC UIT 2023 CTF
-
