@@ -4,7 +4,7 @@
 
 ### Problem:
 
-```
+```python
 @app.route('/check', methods=['POST', 'GET'])
 def check():
     r = requests.Session()
@@ -30,7 +30,7 @@ def check():
         return render_template('check.html') 
 ```
 
-```
+```python
 image = Image.open(name)
             image_dict = {
                    "Filename": image.filename,
