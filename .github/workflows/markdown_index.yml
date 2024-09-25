@@ -1,3 +1,6 @@
-              - name: Markdown action: create index
-                uses: DaanV2/Markdown-Action-Create-Indexes@v5.0.2
-          
+      - name: Create Indexes
+        uses: Exponential-Workload/create-index-action@master
+        with:
+          dir: '../' # optional - directory to create indexes in
+          # path: <some path> # optional, discouraged - path to write executable
+          # source: https://<some url> # optional, discouraged - source url of executable
